@@ -18,7 +18,7 @@
 # Enable or disable Python management via the :ref:`debops.python` role.
 python__enabled: True
 
-                                                                   # ]]]
+
 # .. envvar:: python__raw_apt_cache_valid_time [[[
 #
 # During Python bootstrapping, check if the APT cache was modified X minutes
@@ -28,6 +28,11 @@ python__enabled: True
 python__raw_apt_cache_valid_time: '-{{ 60 * 60 * 12 }}'
                                                                    # ]]]
                                                                    # ]]]
+
+# TODO probably can be autodetected
+python__py3_default_version: '36'
+python__py2_default_version: '27'
+
 # Python 3 management [[[
 # -----------------------
 
@@ -50,6 +55,11 @@ python__core_packages3:
   - 'python3'
   - 'python3-apt'
 
+python__core_packages3_bsd:
+  # It has to be hard-coded to `bsd` instead of using OS detection, because
+  # there is no OS detection with the `raw` module.
+  - 'python3'
+
                                                                    # ]]]
 # .. envvar:: python__base_packages3 [[[
 #
@@ -58,13 +68,12 @@ python__core_packages3:
 # via the :command:`pip3` command from the PyPI repository, as well as Ansible
 # opration on the remote host.
 python__base_packages3:
-  - 'python3-httplib2'
-  - 'python3-pip'
-  - 'python3-setuptools'
-  - 'python3-pycurl'
-  - 'python3-virtualenv'
-  - 'python3-wheel'
-  - 'virtualenv'
+  - "{{'python3-httplib2'   if ansible_os_family != 'FreeBSD' else 'py{{python__py3_default_version}}-httplib2'}}"
+  - "{{'python3-pip'        if ansible_os_family != 'FreeBSD' else 'py{{python__py3_default_version}}-pip'}}"
+  - "{{'python3-setuptools' if ansible_os_family != 'FreeBSD' else 'py{{python__py3_default_version}}-setuptools'}}"
+  - "{{'python3-pycurl'     if ansible_os_family != 'FreeBSD' else 'py{{python__py3_default_version}}-pycurl'}}"
+  - "{{'python3-wheel'      if ansible_os_family != 'FreeBSD' else 'py{{python__py3_default_version}}-wheel'}}"
+  - "{{'python3-virtualenv' if ansible_os_family != 'FreeBSD' else 'py{{python__py3_default_version}}-virtualenv'}}"
 
                                                                    # ]]]
 # .. envvar:: python__packages3 [[[
@@ -122,6 +131,10 @@ python__core_packages2:
   - 'python-apt'
 
                                                                    # ]]]
+
+python__core_packages2_bsd:
+  - 'python2'
+
 # .. envvar:: python__base_packages2 [[[
 #
 # List of base Python 2 packges to install via APT. These packages should allow
@@ -129,14 +142,12 @@ python__core_packages2:
 # via the :command:`pip` command from the PyPI repository, as well as Ansible
 # opration on the remote host.
 python__base_packages2:
-  - 'python-httplib2'
-  - 'python-pip'
-  - 'python-setuptools'
-  - 'python-pycurl'
-  - 'python-virtualenv'
-  - '{{ [] if (ansible_distribution_release in
-               [ "wheezy", "precise" ])
-           else "python-wheel" }}'
+  - "{{'python3-httplib2'   if ansible_os_family != 'FreeBSD' else 'py{{python__py2_default_version}}-httplib2'}}"
+  - "{{'python3-pip'        if ansible_os_family != 'FreeBSD' else 'py{{python__py2_default_version}}-pip'}}"
+  - "{{'python3-setuptools' if ansible_os_family != 'FreeBSD' else 'py{{python__py2_default_version}}-setuptools'}}"
+  - "{{'python3-pycurl'     if ansible_os_family != 'FreeBSD' else 'py{{python__py2_default_version}}-pycurl'}}"
+  - "{{'python3-wheel'      if ansible_os_family != 'FreeBSD' else 'py{{python__py3_default_version}}-wheel'}}"
+  - "{{'python3-virtualenv' if ansible_os_family != 'FreeBSD' else 'py{{python__py3_default_version}}-virtualenv'}}"
 
                                                                    # ]]]
 # .. envvar:: python__packages2 [[[
@@ -180,12 +191,18 @@ python__core_packages: '{{ (python__core_packages3
                            + (python__core_packages2
                               if (python__v2|bool) else []) }}'
 
+python__core_packages_bsd: '{{ (python__core_packages3_bsd
+                            if (python__v3|bool) else [])
+                           + (python__core_packages2_bsd
+                              if (python__v2|bool) else []) }}'
                                                                    # ]]]
 # .. envvar:: python__combined_packages [[[
 #
 # List of APT packages that contains Python packages selected by the role for
 # installation. This variable is used in the role tasks.
-python__combined_packages: '{{ python__core_packages
+python__combined_packages: '{{ (python__core_packages
+                                if ansible_os_family != "FreeBSD"
+                                else python__core_packages_bsd)
                                + ((python__base_packages3
                                    + python__packages3
                                    + python__group_packages3

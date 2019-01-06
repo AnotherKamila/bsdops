@@ -20,7 +20,7 @@
     path: '/etc/ansible/facts.d'
     state: 'directory'
     owner: 'root'
-    group: 'root'
+    group: "{{'root' if ansible_os_family != 'FreeBSD' else 'wheel'}}"
     mode: '0755'
 
 - name: Save Python local facts
@@ -28,7 +28,7 @@
     src: 'etc/ansible/facts.d/python.fact.j2'
     dest: '/etc/ansible/facts.d/python.fact'
     owner: 'root'
-    group: 'root'
+    group: "{{'root' if ansible_os_family != 'FreeBSD' else 'wheel'}}"
     mode: '0755'
   register: python__register_facts
 
