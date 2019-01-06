@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Update submodules
+
+set -e
+
+worktree="$(git config --get deploy.worktree)"
+
+test -d "${worktree}" || mkdir -p "${worktree}"
+
+cd "${worktree}" || exit 1
+
+git submodule sync && git submodule update --init --force --recursive

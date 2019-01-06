@@ -1,0 +1,31 @@
+---
+
+- import_playbook: mount.yml
+
+- import_playbook: netbase.yml
+
+- import_playbook: sysnews.yml
+
+- import_playbook: kmod.yml
+
+- import_playbook: sysfs.yml
+
+- import_playbook: swapfile.yml
+
+- import_playbook: lvm.yml
+
+- import_playbook: nfs_server.yml
+
+- import_playbook: nfs.yml
+
+- import_playbook: gitusers.yml
+
+- import_playbook: sftpusers.yml
+
+- import_playbook: slapd.yml
+
+- import_playbook: iscsi.yml
+
+- import_playbook: cryptsetup.yml
+
+- import_playbook: persistent_paths.yml

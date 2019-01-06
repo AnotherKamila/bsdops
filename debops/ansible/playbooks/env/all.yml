@@ -1,0 +1,15 @@
+---
+
+- import_playbook: nodejs.yml
+
+- import_playbook: ruby.yml
+
+- import_playbook: golang.yml
+
+- import_playbook: java.yml
+
+- import_playbook: cran.yml
+
+- import_playbook: php.yml
+
+- import_playbook: fcgiwrap.yml
