@@ -1,0 +1,24 @@
+---
+# vim: foldmarker=[[[,]]]:foldmethod=marker
+
+# Package install of essential software [[[
+- name: Make sure essential software is installed
+  package:
+    name: '{{ item }}'
+    state: 'present'
+  tags: [ 'role::bootstrap:packages' ]
+  with_flattened:
+    - '{{ bootstrap__base_packages }}'
+    - '{{ bootstrap__packages }}'
+# ]]]
+
+- name: Gather information about existing users
+  getent:
+    database: 'passwd'
+    split: ':'
+  tags: [ 'role::bootstrap:admin' ]
+
+- name: Manage System Administrator accounts
+  import_tasks: admin_accounts.yml
+  when: bootstrap__admin|bool
+  tags: [ 'role::bootstrap:admin' ]

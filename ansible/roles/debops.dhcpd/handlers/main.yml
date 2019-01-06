@@ -1,0 +1,15 @@
+---
+
+- name: Restart dhcp server
+  service:
+    name: '{{ item }}'
+    state: 'restarted'
+  with_items: "{{ dhcpd_services.server }}"
+
+- name: Restart dhcp relay
+  service:
+    name: '{{ item }}'
+    state: 'restarted'
+  with_items: "{{ dhcpd_services.relay }}"
+
+# vim: set ts=2 sw=2:

@@ -1,0 +1,6 @@
+---
+
+- name: Restart etherpad-lite
+  service:
+    name: 'etherpad-lite'
+    state: 'restarted'

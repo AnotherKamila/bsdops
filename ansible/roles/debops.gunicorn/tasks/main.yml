@@ -1,0 +1,32 @@
+---
+
+- name: Configure Green Unicorn on older OS releases
+  include_tasks: 'older_releases.yml'
+  when: ansible_distribution_release in
+        [ 'wheezy', 'jessie', 'precise', 'trusty', 'xenial' ]
+
+- name: Configure Green Unicorn on newer OS releases
+  include_tasks: 'newer_releases.yml'
+  when: ansible_distribution_release not in
+        [ 'wheezy', 'jessie', 'precise', 'trusty', 'xenial' ]
+
+- name: Make sure that Ansible local facts directory exists
+  file:
+    path: '/etc/ansible/facts.d'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+- name: Save gunicorn local facts
+  template:
+    src: 'etc/ansible/facts.d/gunicorn.fact.j2'
+    dest: '/etc/ansible/facts.d/gunicorn.fact'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+  register: gunicorn__register_facts
+
+- name: Update Ansible facts if they were modified
+  action: setup
+  when: gunicorn__register_facts is changed

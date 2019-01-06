@@ -1,0 +1,21 @@
+---
+
+- name: Check samba config
+  command: testparm -s
+  notify: [ 'Reload nmbd', 'Reload smbd' ]
+
+- name: Reload nmbd
+  service:
+    name: 'nmbd'
+    state: 'restarted'
+
+- name: Reload smbd
+  service:
+    name: 'smbd'
+    state: 'reloaded'
+
+- name: Reload samba
+  service:
+    name: '{{ samba__service_name }}'
+    state: 'reloaded'
+  when: ('samba' in samba__base_packages)
