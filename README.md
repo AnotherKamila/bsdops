@@ -37,11 +37,24 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
 ### Bootstrap host(s)
 
 1. Add your host(s) to the inventory: `$EDITOR ansible/inventory/hosts`
+   * All FreeBSD hosts need to be in a group named `freebsd`  (this is used to run the right OS-specific things).  
+      Example inventory file:
+      ```
+      [freebsd]
+      bsdops-test
+
+      [debops_all_hosts:children]
+      freebsd
+      ```
+   * You need to change the Python path used by Ansible, as it hard-codes it. The easiest option is to add a `group_vars/freebsd/paths.yml` with the line `ansible_python_interpreter: /usr/local/bin/python2`. (TODO this could be done without user fiddling.)
 
 2. Bootstrap your host(s):
+  Make sure that you can log in without password (`--ask-pass` doesn't work with FreeBSD).  
+  For example: `ssh-copy-id myhost`.
+  Then run:
   ```
-  debops bootstrap <parameters-needed-to-connect> [--limit yourhostname]
+  debops bootstrap <parameters-needed-to-connect> [--limit myhost]
   # examples:
-  # debops bootstrap -u root --ask-pass  # if you can log in as root with a password
-  # debops bootstrap -u admin --ask-pass --become --ask-become-pass  # if you can log in as a user that has sudo
+  # debops bootstrap -u root  # if you can log in as root
+  # debops bootstrap -u admin --become --ask-become-pass  # if you can log in as a user that has sudo
   ```
