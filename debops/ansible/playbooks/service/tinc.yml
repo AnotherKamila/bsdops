@@ -1,5 +1,0 @@
----
-
-- import_playbook: tinc-plain.yml
-
-- import_playbook: tinc-persistent_paths.yml

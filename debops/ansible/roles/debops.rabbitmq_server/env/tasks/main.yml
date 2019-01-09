@@ -1,5 +1,0 @@
----
-
-- name: Prepare debops.rabbitmq_server environment
-  set_fact:
-    rabbitmq_server__secret__directories: '{{ lookup("template", "lookup/rabbitmq_server__secret__directories.j2") | from_yaml }}'

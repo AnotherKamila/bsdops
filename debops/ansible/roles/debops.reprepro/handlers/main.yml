@@ -1,6 +1,0 @@
----
-
-- name: Restart inoticoming
-  service:
-    name: 'inoticoming'
-    state: 'restarted'

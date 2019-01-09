@@ -1,6 +1,0 @@
-# {{ ansible_managed }}
-
-[Service]
-{% if elasticsearch__memory_lock|bool %}
-LimitMEMLOCK={{ elasticsearch__systemd_limit_memlock }}
-{% endif %}

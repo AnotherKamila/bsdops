@@ -1,5 +1,0 @@
----
-
-- name: Prepare Icinga environment
-  set_fact:
-    icinga__secret__directories: '{{ lookup("template", "lookup/icinga__secret__directories.j2") | from_yaml }}'

@@ -1,6 +1,0 @@
----
-
-- name: Restart saslauthd
-  service:
-    name: 'saslauthd'
-    state: 'restarted'

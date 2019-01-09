@@ -1,6 +1,0 @@
----
-- name: Debug host variables
-  hosts: all
-  tasks:
-    - name: Display all variables/facts known for a host
-      debug: var=hostvars[inventory_hostname]

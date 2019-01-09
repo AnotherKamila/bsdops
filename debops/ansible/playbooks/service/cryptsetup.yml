@@ -1,5 +1,0 @@
----
-
-- import_playbook: cryptsetup-plain.yml
-
-- import_playbook: cryptsetup-persistent_paths.yml

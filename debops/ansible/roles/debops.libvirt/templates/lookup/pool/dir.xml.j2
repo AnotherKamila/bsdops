@@ -1,9 +1,0 @@
-<pool type='dir'>
-  <name>{{ item.name }}</name>
-{% if item.uuid|d() %}
-  <uuid>{{ item.uuid }}</uuid>
-{% endif %}
-  <target>
-    <path>{{ item.path }}</path>
-  </target>
-</pool>

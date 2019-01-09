@@ -1,6 +1,0 @@
----
-
-- name: Restart sysfsutils
-  service:
-    name: 'sysfsutils'
-    state: 'restarted'

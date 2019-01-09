@@ -1,4 +1,0 @@
----
-
-- name: Gather Roundcube facts
-  action: setup

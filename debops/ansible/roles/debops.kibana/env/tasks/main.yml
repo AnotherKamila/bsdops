@@ -1,5 +1,0 @@
----
-
-- name: Prepare debops.kibana environment
-  set_fact:
-    kibana__secret__directories: '{{ lookup("template", "lookup/kibana__secret__directories.j2") | from_yaml }}'
