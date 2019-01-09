@@ -1,0 +1,5 @@
+---
+
+- import_playbook: mosquitto-plain.yml
+
+- import_playbook: mosquitto-nginx.yml

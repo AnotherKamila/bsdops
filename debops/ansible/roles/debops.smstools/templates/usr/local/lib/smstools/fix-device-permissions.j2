@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# This file is managed by Ansible, all changes will be lost
+
+# Fix device permissions (needed in OpenVZ containers)
+
+owner='root'
+group='dialout'
+mode='ug=rw'
+
+read -r -a modem_devices <<< "{{ smstools_devices | selectattr('device', 'defined') | map(attribute='device') | list | join(' ') }}"
+
+for modem in "${modem_devices[@]}" ; do
+    if [ -e "${modem}" ]; then
+        chown ${owner}:${group} "${modem}"
+        chmod ${mode} "${modem}"
+    fi
+done

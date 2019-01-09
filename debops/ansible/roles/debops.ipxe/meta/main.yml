@@ -1,0 +1,35 @@
+---
+
+dependencies:
+
+  - role: debops.ansible_plugins
+
+  - role: debops.apt_preferences
+    tags: apt_preferences
+    apt_preferences_dependent_list:
+
+      - package: 'ipxe'
+        backports: [ 'wheezy' ]
+        reason:  'Support for --autofree and --replace parameters'
+        by_role: 'debops.ipxe'
+
+galaxy_info:
+
+  role_name: 'ipxe'
+  author: 'Maciej Delmanowski'
+  description: 'Manage iPXE configuration scripts'
+  company: 'DebOps'
+  license: 'GNU General Public License v3'
+  min_ansible_version: '1.7.0'
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - tftp
+    - pxe
+    - netboot
+    - provisioning

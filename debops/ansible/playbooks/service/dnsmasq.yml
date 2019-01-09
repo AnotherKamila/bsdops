@@ -1,0 +1,5 @@
+---
+
+- import_playbook: dnsmasq-plain.yml
+
+- import_playbook: dnsmasq-persistent_paths.yml

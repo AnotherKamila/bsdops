@@ -1,0 +1,5 @@
+---
+
+- import_playbook: owncloud-apache.yml
+
+- import_playbook: owncloud-nginx.yml

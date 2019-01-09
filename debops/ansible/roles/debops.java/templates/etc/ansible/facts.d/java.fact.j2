@@ -1,0 +1,24 @@
+#!/usr/bin/python{{ '2' if (ansible_python_version is version_compare('3.5', '<')) else '3' }}
+
+# {{ ansible_managed }}
+
+from __future__ import print_function
+from json import dumps
+import subprocess
+
+output = {"installed": True}
+
+try:
+    java_version_output = subprocess.check_output(
+        ['java', '-version'],
+        stderr=subprocess.STDOUT)
+
+except subprocess.CalledProcessError:
+    pass
+
+if java_version_output:
+    for line in java_version_output.split('\n'):
+        if 'version' in line:
+            output['version'] = line.split()[2].strip('"').split('_')[0]
+
+print(dumps(output, sort_keys=True, indent=2))

@@ -1,0 +1,27 @@
+---
+
+- name: Configure dnsmasq
+  hosts: [ 'debops_service_dnsmasq' ]
+  become: True
+
+  environment: '{{ inventory__environment | d({})
+                   | combine(inventory__group_environment | d({}))
+                   | combine(inventory__host_environment  | d({})) }}'
+
+  roles:
+
+    - role: debops.dnsmasq/env
+      tags: [ 'role::dnsmasq', 'role::ferm', 'role::tcpwrappers' ]
+
+    - role: debops.ferm
+      tags: [ 'role::ferm', 'skip::ferm' ]
+      ferm__dependent_rules:
+        - '{{ dnsmasq__ferm__dependent_rules }}'
+
+    - role: debops.tcpwrappers
+      tags: [ 'role::tcpwrappers', 'skip::tcpwrappers' ]
+      tcpwrappers__dependent_allow:
+        - '{{ dnsmasq__env_tcpwrappers__dependent_allow }}'
+
+    - role: debops.dnsmasq
+      tags: [ 'role::dnsmasq', 'skip::dnsmasq' ]
