@@ -20,18 +20,12 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
   debops-init .
   ```
 
-3. Tell `debops` to use my fork instead of the official DebOps repo: put it into a `debops/` subdirectory:
+3. Tell `debops` to use [my fork](https://github.com/AnotherKamila/debops) instead of the official DebOps repo: put it into a `debops/` subdirectory:
   ```
   # (inside the project directory)
   git clone https://github.com/AnotherKamila/debops debops
   # or git submodule add ...
   # or ln -s ...
-  ```
-
-   Or with `git subtree`:
-  ```
-  git remote add -f bsdops https://github.com/AnotherKamila/debops.git
-  git subtree add --prefix debops/ bsdops master --squash
   ```
 
   Or with `git subrepo`:
@@ -72,7 +66,9 @@ Everything is the same as DebOps, so in theory this section is unnecessary. Howe
 
 * `bootstrap__admin_system`: set to False to have the automatically created admin user get a home directory under `/home` instead of under `/usr/local`.
 
-# Notes to self
+# Development
+
+**This repo contains the documentation (so, this README) and an example debops project that you can use as a starting point. The repo with my patched version of debops lives at [anotherkamila/debops](https://github.com/AnotherKamila/debops).**
 
 Development workflow with `git subrepo`:
 
