@@ -2,7 +2,16 @@
 
 DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
 
-**Note: This is currently in a very very very early stage of development. Currently only `debops bootstrap` is fully "FreeBSD-ified", and "extensive testing" is a dream. That said, I use this, and so should you! :D**
+**Note: This is currently in a very early stage of development. Currently only `debops bootstrap` is fully "FreeBSD-ified", and "extensive testing" is a dream.**
+
+## Why should I use this, especially when I know it will break?
+
+Because:
+
+1. you should use configuration management
+2. Ansible is a decent configuration management option, so you likely want to use that
+3. If you're going to use Ansible, you will have to write your own roles, because there is no "ready-made" option for FreeBSD
+4. If you're going to write your own roles, you might as well start with a decent base that can benefit other people too, such as this one :-)
 
 ## How to use
 
@@ -32,6 +41,8 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
     ```
     git subrepo clone https://github.com/anotherkamila/debops.git debops/
     ```
+    
+    (this repository uses `git subrepo`)
 
 ### 2. Bootstrap host(s)
 
@@ -66,7 +77,7 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
 
 This feature will be available in a future version :D
 
-Seriously though: This project is a WIP and so far I have only "FreeBSD-ified" the roles used in the `bootstrap` playbook. Other roles might or might not work (often e.g. paths or package names might be wrong). However, patching these higher-level roles should be relatively straight-forward in most cases. So: Try it, see what breaks, and send a pull request!
+Seriously though: This project is a WIP and so far I have only "FreeBSD-ified" the roles used in the `bootstrap` playbook. Other roles might or might not work (often e.g. paths or package names might be wrong). However, patching these higher-level roles should be relatively straight-forward in many cases. So: Try it, see what breaks, and send a pull request!
 
 The next roles I intend to convert are generic basic things like firewalling. My use-case is a router box, so the things I'll work on next will be going in that direction. If you want something else, I'll happily accept pull requests :-)
 
@@ -80,7 +91,7 @@ Everything is the same as DebOps, so in theory this section is unnecessary. Howe
 
 ### Compatibility with Debian-based hosts
 
-Ideally, my DebOps fork should work the same as original DebOps on non-FreeBSD hosts -- the idea is to add new functionality without breaking existing stuff. That said, I do not currently have the capacity to test this that much. So, it may break. But if it does break, it's a bug, so please report it (ideally with a patch :-)).
+Ideally, my DebOps fork should work the same as original DebOps on non-FreeBSD hosts -- the idea is to add new functionality without breaking existing stuff. That said, I do not currently have the capacity to test that much. So, it may break. But if it does break, it's a bug, so please report it (ideally with a patch :-)).
 
 # Development
 
@@ -89,7 +100,7 @@ Ideally, my DebOps fork should work the same as original DebOps on non-FreeBSD h
 Development workflow with `git subrepo`:
 
 ```
-git subrepo clone git@github.com:anotherkamila/debops.git debops/
+git subrepo clone git@github.com:anotherkamila/debops.git debops/  # use your fork
 [hack hack]
 [git commit ...]
 git subrepo push debops
@@ -101,7 +112,7 @@ Updating `debops` from upstream with minimum suffering:
 
 ```
 git subrepo push debops
-cd WHEREVER_I_CHECKED_OUT_TOPLEVEL_REPO
+cd WHEREVER_I_CHECKED_OUT_DEBOPS_REPO_AS_TOPLEVEL
 git pull origin master
 git fetch --all
 git merge upstream/master
