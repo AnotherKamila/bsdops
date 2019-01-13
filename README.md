@@ -125,4 +125,4 @@ git subrepo pull debops
 
 The contents of this repository EXCLUDING the `debops/` directory is licensed under BSD 2-clause license, as indicated by the LICENSE file.
 
-As DebOps is licensed under GPL, the `debops/` directory and my changes in it are licensed under GPL. My apologies.
+As DebOps is licensed under GPL, the `debops/` directory and my changes in it are licensed under GPL.
