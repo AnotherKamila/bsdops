@@ -185,11 +185,6 @@ Changed
   This is done to solve the connectivity issues with ``cdimage.debian.org``
   host.
 
-- [debops.ipxe] The role will install the original release of the
-  ``netboot.tar.gz`` Debian Installer image instead of the current release,
-  which seems to be broken at the moment. New default variable is added to
-  allow selection of the image version.
-
 - The hostname and domain configuration during bootstrapping is now done by the
   :ref:`debops.netbase` Ansible role. The default for this role is to remove
   the ``127.0.1.1`` host entry from the :file:`/etc/hosts` file to ensure that
@@ -211,10 +206,14 @@ Changed
   Read the documentation about :ref:`resources__ref_templates` for more details
   on templating with `debops`.
 
-- [debops.dnsmasq] The role has been redesigned from the groun up with new
+- [debops.dnsmasq] The role has been redesigned from the ground up with new
   configuration pipeline, support for multiple subdomains and better default
   configuration. See the :ref:`debops.dnsmasq` role documentation as well as
   the :ref:`upgrade_notes` for more details.
+
+- [debops.owncloud] Drop support for Nextcloud 12.0 which is EOF. Add support
+  for Nextcloud 14.0 and 15.0 and make Nextcloud 14.0 the default Nextcloud
+  version.
 
 Fixed
 ~~~~~

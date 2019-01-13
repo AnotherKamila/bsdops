@@ -50,7 +50,7 @@
     owner: 'root'
     group: 'root'
     mode: '0644'
-  when: sudo__enabled|bool and sudo__logind_session|bool and ansible_service_mgr == 'systemd'
+  when: sudo__enabled|bool and sudo__logind_session|bool
 
 - name: Make sure that Ansible local facts directory exists
   file:
