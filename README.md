@@ -2,7 +2,7 @@
 
 DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
 
-**Note: This is currently in a very very very early stage of development. Currently nothing is working. I am aiming to have the `bootstrap` playbook working soon.**
+**Note: This is currently in a very very very early stage of development. Currently only `debops boostrap` works, and "extensive testing" is a dream.**
 
 ## How to use
 
@@ -65,6 +65,12 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
   # debops bootstrap -u root  # if you can log in as root
   # debops bootstrap -u admin --become --ask-become-pass  # if you can log in as a user that has sudo
   ```
+
+### Configuration
+
+Everything is the same as DebOps, so in theory this section is unnecessary. However, as a quick reference, this is a list of things one might want to change often:
+
+* `bootstrap__admin_system`: set to False to have the automatically created admin user get a home directory under `/home` instead of under `/usr/local`.
 
 # Notes to self
 
