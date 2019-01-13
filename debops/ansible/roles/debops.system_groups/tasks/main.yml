@@ -25,7 +25,7 @@
 
 - name: Remove sudo configuration if not specified
   file:
-    path: '/etc/sudoers.d/{{ item.sudoers_filename | d("system_groups-" + item.name) }}'
+    path: '{{ pkg_base_path|d() }}/etc/sudoers.d/{{ item.sudoers_filename | d("system_groups-" + item.name) }}'
     state: 'absent'
   with_items: '{{ system_groups__combined_list | parse_kv_items }}'
   when: system_groups__enabled|bool and system_groups__sudo_enabled|bool and
@@ -35,11 +35,11 @@
 - name: Configure sudo for UNIX system groups
   template:
     src: 'etc/sudoers.d/system_groups.j2'
-    dest: '/etc/sudoers.d/{{ item.sudoers_filename | d("system_groups-" + item.name) }}'
+    dest: '{{ pkg_base_path|d() }}/etc/sudoers.d/{{ item.sudoers_filename | d("system_groups-" + item.name) }}'
     owner: 'root'
-    group: 'root'
+    group: "{{'root' if ansible_os_family != 'FreeBSD' else 'wheel'}}"
     mode: '0440'
-    validate: '/usr/sbin/visudo -cf %s'
+    validate: '{{ pkg_base_path|d("/usr") }}/sbin/visudo -cf %s'
   with_items: '{{ system_groups__combined_list | parse_kv_items }}'
   when: system_groups__enabled|bool and system_groups__sudo_enabled|bool and
         item.name|d() and item.state|d('present') not in [ 'init', 'absent', 'ignore' ] and
@@ -77,7 +77,7 @@
     path: '/etc/ansible/facts.d'
     state: 'directory'
     owner: 'root'
-    group: 'root'
+    group: "{{'root' if ansible_os_family != 'FreeBSD' else 'wheel'}}"
     mode: '0755'
 
 - name: Save system groups local facts
@@ -85,7 +85,7 @@
     src: 'etc/ansible/facts.d/system_groups.fact.j2'
     dest: '/etc/ansible/facts.d/system_groups.fact'
     owner: 'root'
-    group: 'root'
+    group: "{{'root' if ansible_os_family != 'FreeBSD' else 'wheel'}}"
     mode: '0755'
   register: system_groups__register_facts
 

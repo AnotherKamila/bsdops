@@ -51,7 +51,9 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
       [debops_all_hosts:children]
       freebsd
       ```
-   * You need to change the Python path used by Ansible, as it hard-codes it. The easiest option is to add a `group_vars/freebsd/paths.yml` with the line `ansible_python_interpreter: /usr/local/bin/python2`. (TODO this could be done without user fiddling.)
+   * Create the file `group_vars/freebsd/paths.yml`. You can copy the one in this repo. It contains the following variables:
+       * `ansible_python_interpreter: /usr/local/bin/python2`. This is the Python path used by Ansible on the host. Ansible hard-codes it to `/usr/bin/python`, so we need to override it.
+       * `pkg_base_path: /usr/local/`. The base path for things not in the base system.
 
 2. Bootstrap your host(s):
   Make sure that you can log in without password (`--ask-pass` doesn't work with FreeBSD).  

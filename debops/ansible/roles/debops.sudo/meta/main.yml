@@ -22,6 +22,9 @@ galaxy_info:
         - jessie
         - stretch
         - buster
+    - name: FreeBSD
+      versions:
+        - 12.0
   galaxy_tags:
     - sudo
     - authentication
