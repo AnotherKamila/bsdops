@@ -6,6 +6,7 @@
 [subrepo]
 	remote = git@github.com:anotherkamila/debops.git
 	branch = master
-	commit = 0930c8c7c37a729050fa77b237dfbb8e6493080c
-	parent = 90055d187ef905438d2c41ca00a566d2a7e4cb9b
-	cmdver = 0.3.1
+	commit = d3357e1ebc4bfc94bd3716b53993f3e732a2d13b
+	parent = b480c46357538e97eb816da7f033e67374f33dd4
+	cmdver = 0.4.0
+	method = merge
