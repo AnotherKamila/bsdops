@@ -84,3 +84,16 @@ git subrepo push debops
 git push
 
 ```
+
+Updating `debops` from upstream with minimum suffering:
+
+```
+git subrepo push debops
+cd WHEREVER_I_CHECKED_OUT_TOPLEVEL_REPO
+git pull origin master
+git fetch --all
+git merge upstream/master
+git push
+cd BACK_TO_HERE
+git subrepo pull debops
+```
