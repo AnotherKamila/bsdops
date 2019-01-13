@@ -4,7 +4,8 @@
   include: '{{ lookup("task_src", "sshd/pre_main.yml") }}'
 
 - name: Check if OpenSSH is installed (or half-installed)
-  script: 'scripts/dpkg-state{{ "2" if (ansible_python_version is version_compare("3.5", "<")) else "3" }} openssh-server'
+  script: 'scripts/dpkg-state{{ "2" if (ansible_python_version is version_compare("3.5", "<"))
+                                    else "3" }} openssh-server'
   register: sshd__register_prev_pkg_state
   changed_when: False
   failed_when: sshd__register_prev_pkg_state.rc != 0 or
@@ -70,6 +71,8 @@
     - '{{ sshd__optional_packages }}'
     - '{{ sshd__ldap_packages }}'
     - '{{ sshd__packages }}'
+  register: sshd__register_packages
+  until: sshd__register_packages is succeeded
 
 - name: Check OpenSSH server version
   environment:
@@ -101,6 +104,25 @@
   register: sshd__register_host_keys
   changed_when: False
   check_mode: False
+  tags: [ 'role::sshd:config' ]
+
+- name: Get list of available host certs
+  shell: find /etc/ssh -maxdepth 1 -type f -name 'ssh_host_*_key-cert.pub' -exec basename {} .pub \;
+  register: sshd__register_host_certs
+  changed_when: False
+  check_mode: False
+  when: sshd__scan_for_host_certs
+  tags: [ 'role::sshd:config' ]
+
+- name: Setup trusted user CA key file
+  template:
+    src:      '{{ lookup("template_src", "etc/ssh/trusted_user_ca_file.pem.j2") }}'
+    dest:     '{{ sshd__trusted_user_ca_keys_file }}'
+    owner:    'root'
+    group:    'root'
+    mode:     '0644'
+  when: sshd__trusted_user_ca_keys | d() | length > 0  and
+        sshd__trusted_user_ca_keys_file is defined
   tags: [ 'role::sshd:config' ]
 
 - name: Setup /etc/ssh/sshd_config
