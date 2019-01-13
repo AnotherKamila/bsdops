@@ -66,6 +66,10 @@ Everything is the same as DebOps, so in theory this section is unnecessary. Howe
 
 * `bootstrap__admin_system`: set to False to have the automatically created admin user get a home directory under `/home` instead of under `/usr/local`.
 
+### Compatibility with Debian-based hosts
+
+Ideally, my DebOps fork should work the same as original DebOps on non-FreeBSD hosts -- the idea is to add new functionality without breaking existing stuff. That said, I do not currently have the capacity to test this that much. So, it may break. But if it does break, it's a bug, so please report it (ideally with a patch :-)).
+
 # Development
 
 **This repo contains the documentation (so, this README) and an example debops project that you can use as a starting point. The repo with my patched version of debops lives at [anotherkamila/debops](https://github.com/AnotherKamila/debops).**
