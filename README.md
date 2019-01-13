@@ -34,6 +34,11 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
   git subtree add --prefix debops/ bsdops master --squash
   ```
 
+  Or with `git subrepo`:
+  ```
+  git subrepo clone https://github.com/anotherkamila/debops.git debops/
+  ```
+
 ### Bootstrap host(s)
 
 1. Add your host(s) to the inventory: `$EDITOR ansible/inventory/hosts`
@@ -58,3 +63,16 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
   # debops bootstrap -u root  # if you can log in as root
   # debops bootstrap -u admin --become --ask-become-pass  # if you can log in as a user that has sudo
   ```
+
+# Notes to self
+
+Development workflow with `git subrepo`:
+
+```
+git subrepo clone git@github.com:anotherkamila/debops.git debops/
+[hack hack]
+[git commit ...]
+git subrepo push debops
+git push
+
+```
