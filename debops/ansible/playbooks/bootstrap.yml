@@ -49,7 +49,6 @@
 
     - role: debops.apt
       tags: [ 'role::apt', 'skip::apt' ]
-      when: ansible_os_family != 'FreeBSD'
 
     - role: debops.python
       tags: [ 'role::python', 'skip::python' ]

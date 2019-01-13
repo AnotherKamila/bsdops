@@ -1,0 +1,40 @@
+# Basic differences vs Linux. Required to make things work.
+ansible_python_interpreter: /usr/local/bin/python2
+
+# Roles which are not needed on FreeBSD.
+apt__enabled: False
+
+# Overrides for variables used by DebOps roles
+# debops.bootstrap
+bootstrap__base_packages: []
+bootstrap__admin_shell:   '/bin/csh'
+
+# debops.python
+python__core_packages3:
+  - python3
+
+python__core_packages2:
+  - python2
+
+python__base_packages3:
+  - py{{python__py3_default_version}}-httplib2
+  - py{{python__py3_default_version}}-pip
+  - py{{python__py3_default_version}}-setuptools
+  - py{{python__py3_default_version}}-pycurl
+  - py{{python__py3_default_version}}-wheel
+  - py{{python__py3_default_version}}-virtualenv
+
+python__base_packages2:
+  - py{{python__py2_default_version}}-httplib2
+  - py{{python__py2_default_version}}-pip
+  - py{{python__py2_default_version}}-setuptools
+  - py{{python__py2_default_version}}-pycurl
+  - py{{python__py2_default_version}}-wheel
+  - py{{python__py2_default_version}}-virtualenv
+
+# Variables added to simplify the fork. These do not exist upstream.
+pkg_base_path: '/usr/local/'
+root_group:    'wheel'
+
+python__py3_default_version: '36'
+python__py2_default_version: '27'

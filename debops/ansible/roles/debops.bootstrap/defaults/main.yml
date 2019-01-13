@@ -13,14 +13,12 @@
 # APT and packages [[[
 # --------------------
 
-bootstrap__base_packages_linux:
-  - 'lsb-release'
-  - 'dbus'
-
 # .. envvar:: bootstrap__base_packages [[[
 #
 # Base packages installed during bootstrap.
-bootstrap__base_packages: "{{ bootstrap__base_packages_linux if ansible_os_family != 'FreeBSD' else [] }}"
+bootstrap__base_packages:
+  - 'lsb-release'
+  - 'dbus'
                                                                    # ]]]
 # .. envvar:: bootstrap__packages [[[
 #
@@ -116,7 +114,7 @@ bootstrap__admin_comment: 'System Administrator'
 # .. envvar:: bootstrap__admin_shell [[[
 #
 # Default shell set on the new admin accounts if none is specified.
-bootstrap__admin_shell: "{{ '/bin/bash' if ansible_os_family != 'FreeBSD' else '/bin/csh' }}"
+bootstrap__admin_shell: '/bin/bash'
 
                                                                    # ]]]
 # .. envvar:: bootstrap__admin_sshkeys [[[

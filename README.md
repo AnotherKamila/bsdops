@@ -39,6 +39,11 @@ DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
   git subrepo clone https://github.com/anotherkamila/debops.git debops/
   ```
 
+4.  Copy the file `ansible/inventory/group_vars/freebsd/bsdops_required.yml` into your project.
+      This file contains important settings that adapt DebOps defaults for FreeBSD.
+
+      (In the future, manually copying the variables will not be necessary, but bear with me for a while.)
+
 ### Bootstrap host(s)
 
 1. Add your host(s) to the inventory: `$EDITOR ansible/inventory/hosts`

@@ -1,2 +1,0 @@
-ansible_python_interpreter: /usr/local/bin/python2
-pkg_base_path: /usr/local/
