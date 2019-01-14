@@ -2,6 +2,8 @@
 
 DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
 
+See [Design Goals](https://github.com/AnotherKamila/bsdops/wiki/Design-Goals) for more info on what exactly this project is trying to achieve.
+
 **Note: This is currently in a very early stage of development. Currently only `debops bootstrap` is fully "FreeBSD-ified", and "extensive testing" is a dream.**
 
 ## Why should I use this, especially when I know it will break?
