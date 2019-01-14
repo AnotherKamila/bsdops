@@ -1,4 +1,4 @@
-# bsdops
+# BSDops
 
 DebOps-derived reusable, integrated Ansible configs for FreeBSD-based machines.
 
@@ -92,13 +92,13 @@ The next roles I intend to convert are generic basic things like firewalling. My
 
 See [Common Differences](https://github.com/AnotherKamila/bsdops/wiki/Common-Differences) for a quick list of things which are often different on Linux vs FreeBSD and how I handle them when FreeBSD-ifying roles.
 
-### Configuration
+## Configuration
 
 Everything is the same as DebOps, so in theory this section is unnecessary. However, as a quick reference, this is a list of things one might want to change often:
 
 * `bootstrap__admin_system`: set to False to have the automatically created admin user get a home directory under `/home` instead of under `/usr/local`.
 
-### Compatibility with Debian-based hosts
+## Compatibility with Debian-based hosts
 
 Ideally, my DebOps fork should work the same as original DebOps on non-FreeBSD hosts -- the idea is to add new functionality without breaking existing stuff. That said, I do not currently have the capacity to test that much. So, it may break. But if it does break, it's a bug, so please report it (ideally with a patch :-)).
 
