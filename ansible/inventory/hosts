@@ -18,5 +18,8 @@
 [freebsd]
 bsdops-test
 
+[devuan]
+devuan-vagrantmanaged
+
 [debops_all_hosts:children]
 freebsd

@@ -71,12 +71,6 @@ Because:
       ```
       Note: You can use the same project/inventory for FreeBSD-based and Linux-based hosts, BSDops tries to be compatible.
 
-    * Create the file `group_vars/freebsd/paths.yml`. You can copy the one in this repo. It contains the following variables:
-      * `ansible_python_interpreter: /usr/local/bin/python2`. This is the Python path used by Ansible on the host. Ansible hard-codes it to `/usr/bin/python`, so we need to override it.
-      * `pkg_base_path: /usr/local/`. The base path for things not in the base system.
-      
-      (this step will not be necessary in a future version, see #1)
-
 2.  Bootstrap your host(s):
     Make sure that you can log in without password (`--ask-pass` doesn't work with FreeBSD).  
     For example: `ssh-copy-id myhost`.
