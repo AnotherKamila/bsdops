@@ -58,12 +58,18 @@ Because:
       Example inventory file:
       ```
       [freebsd]
-      bsdops-test
+      freebsdhost.example.org
+
+      # Linux-based hosts still work
+      [linux]
+      debianhost.example.org
+      devuanhost.example.org
 
       [debops_all_hosts:children]
       freebsd
+      linux
       ```
-      Note: You can use the same inventory for FreeBSD-based and Linux-based hosts, BSDops tries to be compatible.
+      Note: You can use the same project/inventory for FreeBSD-based and Linux-based hosts, BSDops tries to be compatible.
 
     * Create the file `group_vars/freebsd/paths.yml`. You can copy the one in this repo. It contains the following variables:
       * `ansible_python_interpreter: /usr/local/bin/python2`. This is the Python path used by Ansible on the host. Ansible hard-codes it to `/usr/bin/python`, so we need to override it.
