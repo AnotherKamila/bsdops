@@ -9,6 +9,9 @@ apt__enabled: False
 bootstrap__base_packages: []
 bootstrap__admin_shell:   '/bin/csh'
 
+# debops.netbase
+netbase__base_packages: []
+
 # debops.python
 python__core_packages3:
   - python3

@@ -10,7 +10,6 @@
   register: netbase__register_packages
   until: netbase__register_packages is succeeded
   when: netbase__enabled|bool
-  when: netbase__enabled|bool and ansible_os_family != 'FreeBSD'
 
 - name: Make sure that Ansible local facts directory exists
   file:
