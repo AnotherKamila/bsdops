@@ -15,8 +15,15 @@
 # not be able to leverage the above features on your current operating system.
 # You can however use a virtual machine as the Ansible Controller.
 
+[myinfra]
+gasfaser
+
+[myinfra:vars]
+bootstrap__admin_system=false
+
 [freebsd]
 bsdops-test
+gasfaser
 
 [devuan]
 devuan-vagrantmanaged
